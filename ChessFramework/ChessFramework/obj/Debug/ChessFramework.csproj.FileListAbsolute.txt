@@ -1,0 +1,11 @@
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\bin\Debug\ChessFramework.exe.config
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\bin\Debug\ChessFramework.exe
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\bin\Debug\ChessFramework.pdb
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.AssemblyReference.cache
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.SuggestedBindingRedirects.cache
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Form1.resources
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Properties.Resources.resources
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.GenerateResource.cache
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.CoreCompileInputs.cache
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.exe
+C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.pdb
