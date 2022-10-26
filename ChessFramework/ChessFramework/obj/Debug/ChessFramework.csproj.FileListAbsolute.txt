@@ -9,3 +9,15 @@ C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramewo
 C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.CoreCompileInputs.cache
 C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.exe
 C:\Users\danus\source\repos\ChessFramework\ChessFramework\obj\Debug\ChessFramework.pdb
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\bin\Debug\ChessFramework.exe.config
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\bin\Debug\ChessFramework.exe
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\bin\Debug\ChessFramework.pdb
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.AssemblyReference.cache
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.SuggestedBindingRedirects.cache
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Form1.resources
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Properties.Resources.resources
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.GenerateResource.cache
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.CoreCompileInputs.cache
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.exe
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.pdb
+C:\GitProjects\Chess\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.PromotePawnForm.resources

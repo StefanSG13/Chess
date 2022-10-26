@@ -99,9 +99,9 @@ namespace ChessFramework
                     if (new Point(x,y) != _lastLocation)
                     {
                         Cell.ChangePieces(_cell[x, y], _cell[_lastLocation.X, _lastLocation.Y]);
-                        if (_cell[x, y].Piece.Equals("Pawn.png"))
+                        if (_cell[x, y].Piece.Equals("Pawn.png") && (x == 7 ||x==0))
                         {
-                            PromotePawn(x, y);
+                            PromotePawn(x, y, _cell[x,y].Team);
                         }
                     }
                     _pressedBefore = false;
@@ -110,10 +110,11 @@ namespace ChessFramework
             _points.Add(_lastLocation);
         }
 
-        public void PromotePawn(int x, int y)
+        public void PromotePawn(int x, int y, string team)
         {
-            var popUp = new Form();
+            var popUp = new PromotePawnForm(team);
             popUp.Show();
+            //var ChoosenPiece = popUp.;
         }
     }
 }
