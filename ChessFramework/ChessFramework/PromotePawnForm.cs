@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ChessFramework.StaticFields;
@@ -13,15 +14,17 @@ namespace ChessFramework
 {
     public partial class PromotePawnForm : Form
     {
-        private String PieceType;
+        public String PieceType { get; private set; }
         private Cell[] _buttons = new Cell[4];
+        private bool _pressedButton=false;
+        private Board _board;
 
-        public PromotePawnForm(String team)
+        public PromotePawnForm(String team, Board board)
         {
-            InitializeComponent();
-            this.Size = new System.Drawing.Size(480,200);
+            this.Size = new System.Drawing.Size(480, 200);
             GenerateButtons();
             SetImages(team);
+            _board = board;
         }
 
         private void PromotePawnForm_Load(object sender, EventArgs e)
@@ -57,7 +60,12 @@ namespace ChessFramework
 
         private void ClickedButton(object sender, MouseEventArgs e)
         {
-
+            Cell btn = (Cell)sender;
+            int i = Array.IndexOf(_buttons, btn);
+            btn = _buttons[i];
+            _pressedButton = true;
+            _board.Piece = btn;
+            this.Close();
         }
     }
 }
