@@ -33,3 +33,15 @@ E:\GitProject\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Promo
 E:\GitProject\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Properties.Resources.resources
 E:\GitProject\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.GenerateResource.cache
 E:\GitProject\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.CoreCompileInputs.cache
+C:\Project\Chess\ChessFramework\ChessFramework\bin\Debug\ChessFramework.exe.config
+C:\Project\Chess\ChessFramework\ChessFramework\bin\Debug\ChessFramework.exe
+C:\Project\Chess\ChessFramework\ChessFramework\bin\Debug\ChessFramework.pdb
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.AssemblyReference.cache
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.SuggestedBindingRedirects.cache
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Form1.resources
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.PromotePawnForm.resources
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.Properties.Resources.resources
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.GenerateResource.cache
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.csproj.CoreCompileInputs.cache
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.exe
+C:\Project\Chess\ChessFramework\ChessFramework\obj\Debug\ChessFramework.pdb

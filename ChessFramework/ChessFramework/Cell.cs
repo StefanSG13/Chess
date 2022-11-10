@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System;
-using static ChessFramework.StaticFields;
 
 namespace ChessFramework
 {
@@ -14,7 +13,7 @@ namespace ChessFramework
         {
             this.Team = Team;
             this.Piece = Piece;
-            BackgroundImage = Image.FromFile(ImagesFolder+Team+Piece);
+            BackgroundImage = Image.FromFile(StaticFields.ImagesFolder+Team+Piece);
         }
 
         public static void ChangePieces(Cell destination, Cell source)

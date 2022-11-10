@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ChessFramework.StaticFields;
 
 namespace ChessFramework
 {
@@ -52,10 +51,10 @@ namespace ChessFramework
 
         public void SetImages(string team)
         {
-            _buttons[0].SetPiece(team, Queen);
-            _buttons[1].SetPiece(team, Rook);
-            _buttons[2].SetPiece(team, Knight);
-            _buttons[3].SetPiece(team, Bishop);
+            _buttons[0].SetPiece(team, StaticFields.Queen);
+            _buttons[1].SetPiece(team, StaticFields.Rook);
+            _buttons[2].SetPiece(team, StaticFields.Knight);
+            _buttons[3].SetPiece(team, StaticFields.Bishop);
         }
 
         private void ClickedButton(object sender, MouseEventArgs e)
