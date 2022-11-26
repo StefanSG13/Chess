@@ -6,6 +6,9 @@ namespace ChessFramework
 {
     public class Board
     {
+
+        #region Fields
+
         private Cell[,] _cell = new Cell[8, 8];
         private Form1 _form;
         private bool _pressedBefore = false;
@@ -13,6 +16,8 @@ namespace ChessFramework
         private List<Point> _points = new List<Point>();
         public Cell Piece = new Cell();
         private Button _undo;
+
+        #endregion Fields
 
         #region GameStart
         public Board(Form1 form)
@@ -91,6 +96,8 @@ namespace ChessFramework
         }
         #endregion GameStart
 
+        #region GameLogic
+
         public void PieceMove(object sender, MouseEventArgs cellEvent)
         {
             Cell pressedCell = (Cell)sender;
@@ -137,5 +144,7 @@ namespace ChessFramework
             popUp.FormClosed += (s,e) => cv(s,e, x, y);
             popUp.Show();
         }
+
+        #endregion GameLogic
     }
 }
