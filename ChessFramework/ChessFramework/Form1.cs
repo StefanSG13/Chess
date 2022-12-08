@@ -11,6 +11,7 @@ namespace ChessFramework
         {
             InitializeComponent();
             this.Size = new System.Drawing.Size(800, 800);
+            this.AutoSize = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)

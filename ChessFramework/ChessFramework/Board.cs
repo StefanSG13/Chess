@@ -1,12 +1,13 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
+using System;
 
 namespace ChessFramework
 {
     public class Board
     {
-
         #region Fields
 
         private Cell[,] _cell = new Cell[8, 8];
@@ -16,6 +17,7 @@ namespace ChessFramework
         private List<Point> _points = new List<Point>();
         public Cell Piece = new Cell();
         private Button _undo;
+        private Stack<Cell[,]> _lastMove = new Stack<Cell[,]>();
 
         #endregion Fields
 
@@ -33,30 +35,29 @@ namespace ChessFramework
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    _cell[i, j] = new Cell();
-                    _cell[i, j].Location = new Point((_form.Width - 20) / 8 * j, (_form.Height - 80) / 8 * i);
-                    _cell[i, j].Width = (_form.Width - 20) / 8;
-                    _cell[i, j].Height = (_form.Height - 80) / 8;
-                    _cell[i, j].Enabled = true;
-                    _cell[i, j].Visible = true;
+                    _cell[i, j] = new Cell
+                    {
+                        Location = new Point((_form.Width - 20) / 8 * j, (_form.Height - 80) / 8 * i),
+                        Width = (_form.Width - 20) / 8,
+                        Height = (_form.Height - 80) / 8,
+                        BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+                    };
                     _cell[i, j].Click += (s, e) => { PieceMove(s, (MouseEventArgs)e); };
                     _form.Controls.Add(_cell[i, j]);
-                    _cell[i, j].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                    //_cell[i, j].
-                    _cell[i, j].BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
                     if ((i + j) % 2 == 1)
                         _cell[i, j].BackColor = Color.Brown;
                 }
             }
 
-           /* _undo = new Button();
-            _undo.Width = 40;
-            _undo.Height = 20;
-            _undo.Location = new Point(_form.Width/2,_form.Height/2);
-            _undo.Enabled = true;
-            _undo.Text = "Undo";
-            _undo.BackColor = Color.Black;
-            _undo.Visible = true; */
+            _undo = new Button
+            {
+                Width = 60,
+                Height = 30,
+                Location = new Point(_form.Width - 80, _form.Height - 70),
+                Text = "Undo"
+            };
+            _undo.Click += (s,e) =>  UndoMove(s,e);
+            _form.Controls.Add(_undo);
         }
 
         public void PlacePieces()
@@ -94,6 +95,7 @@ namespace ChessFramework
             _cell[7, 3].SetPiece(StaticFields.White, StaticFields.Queen);
             _cell[7, 4].SetPiece(StaticFields.White, StaticFields.King);
         }
+
         #endregion GameStart
 
         #region GameLogic
@@ -112,7 +114,6 @@ namespace ChessFramework
                     {
                         _pressedBefore = true;
                         _lastLocation = new Point(x, y);
-                        //_cell[x, y].
                     }
                 }
                 else
@@ -120,10 +121,15 @@ namespace ChessFramework
                     if (new Point(x, y) != _lastLocation)
                     {
                         Cell.ChangePieces(_cell[x, y], _cell[_lastLocation.X, _lastLocation.Y]);
-                        if (_cell[x, y].Piece.Equals("Pawn.png"))
+                        Cell[,] cl = new Cell[8, 8];
+                        Array.Copy(_cell, cl, 64);
+                        Cell.CopyBoard(_cell, cl);
+                        _lastMove.Push(cl);
+                        
+                        if (_cell[x, y].Piece.PieceType.Equals("Pawn.png"))
                         {
-                            if ((_cell[x, y].Team == StaticFields.White && x == 0) || (_cell[x, y].Team == StaticFields.Black && x == 7))
-                                PromotePawn(x, y, _cell[x, y].Team);
+                            if ((_cell[x, y].Piece.Team == StaticFields.White && x == 0) || (_cell[x, y].Piece.Team == StaticFields.Black && x == 7))
+                                PromotePawn(x, y, _cell[x, y].Piece.Team);
                         }
                     }
                     _pressedBefore = false;
@@ -132,17 +138,26 @@ namespace ChessFramework
             _points.Add(_lastLocation);
         }
 
+        private void UndoMove(object sender, System.EventArgs e)
+        {
+            var previousBoard = _lastMove.Pop();
+            _cell = previousBoard;
+        }
+
         public void cv(object sender, FormClosedEventArgs e, int x, int y)
         {
-            if(Piece.Team!=null)
-            Cell.ChangePieces(_cell[x, y], Piece);
+            if(Piece != null)
+                Cell.ChangePieces(_cell[x, y], Piece);
+            _form.Enabled = true;
         }
 
         public void PromotePawn(int x, int y, string team)
         {
             var popUp = new PromotePawnForm(team,this);
+
             popUp.FormClosed += (s,e) => cv(s,e, x, y);
             popUp.Show();
+            _form.Enabled = false;
         }
 
         #endregion GameLogic
