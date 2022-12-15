@@ -31,7 +31,7 @@ namespace ChessFramework.Pieces
 
         public virtual Piece Clone()
         {
-            return this;
+            return this.Clone();
         }
     }
 }

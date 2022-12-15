@@ -3,6 +3,11 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Channels;
 using System;
+using System.Net.Sockets;
+using System.Net;
+using System.Threading;
+using System.IO;
+using System.Text;
 
 namespace ChessFramework
 {
@@ -16,8 +21,11 @@ namespace ChessFramework
         private Point _lastLocation;
         private List<Point> _points = new List<Point>();
         public Cell Piece = new Cell();
-        private Button _undo;
-        private Stack<Cell[,]> _lastMove = new Stack<Cell[,]>();
+
+        public TcpClient client;
+        public NetworkStream clientStream;
+        public bool ascult;
+        public Thread t;
 
         #endregion Fields
 
@@ -48,16 +56,6 @@ namespace ChessFramework
                         _cell[i, j].BackColor = Color.Brown;
                 }
             }
-
-            _undo = new Button
-            {
-                Width = 60,
-                Height = 30,
-                Location = new Point(_form.Width - 80, _form.Height - 70),
-                Text = "Undo"
-            };
-            _undo.Click += (s,e) =>  UndoMove(s,e);
-            _form.Controls.Add(_undo);
         }
 
         public void PlacePieces()
@@ -120,11 +118,7 @@ namespace ChessFramework
                 {
                     if (new Point(x, y) != _lastLocation)
                     {
-                        Cell.ChangePieces(_cell[x, y], _cell[_lastLocation.X, _lastLocation.Y]);
-                        Cell[,] cl = new Cell[8, 8];
-                        Array.Copy(_cell, cl, 64);
-                        Cell.CopyBoard(_cell, cl);
-                        _lastMove.Push(cl);
+                        MovePieces(new Point(x, y), new Point(_lastLocation.X, _lastLocation.Y));
                         
                         if (_cell[x, y].Piece.PieceType.Equals("Pawn.png"))
                         {
@@ -138,17 +132,16 @@ namespace ChessFramework
             _points.Add(_lastLocation);
         }
 
-        private void UndoMove(object sender, System.EventArgs e)
-        {
-            var previousBoard = _lastMove.Pop();
-            _cell = previousBoard;
-        }
-
         public void cv(object sender, FormClosedEventArgs e, int x, int y)
         {
             if(Piece != null)
                 Cell.ChangePieces(_cell[x, y], Piece);
             _form.Enabled = true;
+        }
+
+        public void MovePieces(Point source, Point destination)
+        {
+            Cell.ChangePieces(_cell[source.X, source.Y], _cell[destination.X, destination.Y]);
         }
 
         public void PromotePawn(int x, int y, string team)
@@ -158,6 +151,41 @@ namespace ChessFramework
             popUp.FormClosed += (s,e) => cv(s,e, x, y);
             popUp.Show();
             _form.Enabled = false;
+        }
+
+        public void SendOverLan(Point source, Point destination)
+        {
+            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            string response = $"{source.X}{source.Y}{destination.X}{destination.Y}";
+
+            if (ipAddress != null)
+            {
+                IPEndPoint serverEndPoint = new IPEndPoint(ipAddress, 3000);
+                byte[] receiveBuffer = new byte[100];
+
+                try
+                {
+                    using (TcpClient client = new TcpClient(serverEndPoint))
+                    {
+                        using (Socket socket = client.Client)
+                        {
+                            socket.Connect(serverEndPoint);
+
+                            byte[] data = Encoding.ASCII.GetBytes(response);
+
+                            socket.Send(data, data.Length, SocketFlags.None);
+
+                            socket.Receive(receiveBuffer);
+
+                            Console.WriteLine(Encoding.ASCII.GetString(receiveBuffer));
+                        }
+                    }
+                }
+                catch (SocketException socketException)
+                {
+                    throw;
+                }
+            }
         }
 
         #endregion GameLogic
